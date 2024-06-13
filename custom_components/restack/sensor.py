@@ -63,16 +63,16 @@ class ReStackSensor(ReStackEntity, SensorEntity):
     @property
     def native_value(self) -> str:
         """Return the status of the stack."""
-        if self.stack["lastJob"]:
-            return self.stack["lastJob"]["state"]
+        if self.stack["runningJob"]:
+            return self.stack["runningJob"]["state"]
 
         return "Not runned"
 
     @property
     def icon(self) -> str:
         """Return the icon of the stack."""
-        if self.stack["lastJob"]:
-            if self.stack["lastJob"]["state"] == "Success":
+        if self.stack["runningJob"]:
+            if self.stack["runningJob"]["state"] == "Success":
                 return "mdi:check-circle"
             return "mdi:alpha-x-circle"
 

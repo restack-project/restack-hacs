@@ -58,15 +58,15 @@ class ReStackSwitch(ReStackEntity, SwitchEntity):
     @property
     def is_on(self):
         """If the switch is currently on or off."""
-        if self.stack["lastJob"]:
-            return self.stack["lastJob"]["state"] == "Running"
+        if self.stack["runningJob"]:
+            return self.stack["runningJob"]["state"] == "Running"
 
         return False
 
     async def async_turn_on(self, **kwargs):
         """Turn the switch on."""
-        await self.coordinator.api.execute(self.stack["id"])
+        await self.coordinator.api.stack_execute(self.stack["id"])
 
-    # def turn_off(self, **kwargs):
-    #     """Turn the switch off."""
-    #     self._is_on = False
+    async def async_turn_off(self, **kwargs):
+        """Turn the switch off."""
+        await self.coordinator.api.stack_cancel(self.stack["id"])
