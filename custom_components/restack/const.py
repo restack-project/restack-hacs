@@ -1,4 +1,5 @@
 """Constants for the ReStack integration."""
+
 from __future__ import annotations
 
 from datetime import timedelta
@@ -13,7 +14,7 @@ LOGGER: Logger = getLogger(__package__)
 COORDINATOR_UPDATE_INTERVAL: timedelta = timedelta(seconds=10)
 
 DOMAIN = "restack"
-PLATFORMS: Final = [Platform.SENSOR]
+PLATFORMS: Final = [Platform.SENSOR, Platform.SWITCH]
 
 ATTRIBUTION: Final = "Data provided by ReStack"
 

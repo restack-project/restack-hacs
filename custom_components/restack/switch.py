@@ -1,16 +1,11 @@
-"""Platform for sensor integration."""
+"""Platform for switch integration."""
 
 from __future__ import annotations
 
 import typing
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-    SensorStateClass,
-)
+from homeassistant.components.switch import SwitchEntity, SwitchEntityDescription
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 from homeassistant.const import UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory, EntityDescription
@@ -20,7 +15,7 @@ from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from .const import DOMAIN
 from . import ReStackDataUpdateCoordinator
 from .entity import ReStackEntity
-from .utils import format_entity_name, sensor_name_from_url
+from .utils import format_entity_name
 
 JsonDictType = typing.Dict[str, typing.Any]
 
@@ -30,12 +25,12 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up the ReStack sensors."""
+    """Set up the ReStack switches."""
     coordinator: ReStackDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
     async_add_entities(
-        ReStackSensor(
+        ReStackSwitch(
             coordinator,
-            SensorEntityDescription(
+            SwitchEntityDescription(
                 key=str(stack["name"]),
                 name=stack["name"],
                 entity_category=EntityCategory.DIAGNOSTIC,
@@ -47,8 +42,8 @@ async def async_setup_entry(
     )
 
 
-class ReStackSensor(ReStackEntity, SensorEntity):
-    """Representation of a ReStack sensor."""
+class ReStackSwitch(ReStackEntity, SwitchEntity):
+    """Representation of a ReStack switch."""
 
     def __init__(
         self,
@@ -58,22 +53,20 @@ class ReStackSensor(ReStackEntity, SensorEntity):
     ) -> None:
         """Set entity ID."""
         super().__init__(coordinator, description, stack)
-        self.entity_id = f"sensor.restack_{format_entity_name(self.stack['name'])}"
+        self.entity_id = f"switch.restack_{format_entity_name(self.stack['name'])}"
 
     @property
-    def native_value(self) -> str:
-        """Return the status of the stack."""
+    def is_on(self):
+        """If the switch is currently on or off."""
         if self.stack["lastJob"]:
-            return self.stack["lastJob"]["state"]
+            return self.stack["lastJob"]["state"] == "Running"
 
-        return "Not runned"
+        return False
 
-    @property
-    def icon(self) -> str:
-        """Return the icon of the stack."""
-        if self.stack["lastJob"]:
-            if self.stack["lastJob"]["state"] == "Success":
-                return "mdi:check-circle"
-            return "mdi:alpha-x-circle"
+    async def async_turn_on(self, **kwargs):
+        """Turn the switch on."""
+        await self.coordinator.api.execute(self.stack["id"])
 
-        return "mdi:help-circle"
+    # def turn_off(self, **kwargs):
+    #     """Turn the switch off."""
+    #     self._is_on = False
