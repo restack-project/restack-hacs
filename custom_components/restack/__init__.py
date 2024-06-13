@@ -75,7 +75,7 @@ class ReStackDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self) -> dict | None:
         """Update data."""
-        stacks = await self.api.get_all()
+        stacks = await self.api.stack_get_all()
 
         current_stacks = {
             list(device.identifiers)[0][1]
