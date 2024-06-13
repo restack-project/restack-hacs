@@ -1,20 +1,36 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# ReStack
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+<p align="center">
+    <img src="https://github.com/restack-project/restack/blob/main/docs/assets/logo.png" alt="ReStack Logo" width="72px">
+</p>
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Welcome to ReStack - a self-hosted, open-source project designed to run scripts anywhere!
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## About ReStack
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+ReStack is an application originally created to automate updates to self-hosted infrastructure. The manual process was time-consuming and prone to errors. To streamline this workflow, I developed ReStack - a tool that allows you to execute custom scripts in various environments, providing a flexible and customizable solution for running scripts on your own servers.
+
+## Key Features
+
+- **Self-Hosted**: Run ReStack on your own infrastructure, giving you full control over your environment and data.
+- **Script Execution**: Execute custom scripts.
+- **Script Management**: Organize and manage your scripts efficiently.
+- **Environment Flexibility**: Run scripts in different environments, including local machines, servers, and containers.
+
+## Getting Started
+
+To get started with ReStack, follow these steps:
+
+1. **Installation**: Install ReStack on your server using Docker.
+2. **Script Creation**: Create custom scripts tailored to your specific requirements.
+3. **Execution**: Execute scripts using ReStack's intuitive interface or API endpoints.
+
+## Contributing
+
+ReStack is an open-source project, and we welcome contributions from the community. If you're interested in contributing, visit the [GitHub repository](https://github.com/restack-project) to view the source code, report issues, and submit pull requests.
+
+## Resources
+
+- **Documentation**: Explore the [documentation](https://restack-project.github.io/restack/) for detailed guides, tutorials, and reference materials.
+- **GitHub Repository**: Visit the [GitHub repository](https://github.com/restack-project) to view the source code, report issues, and submit pull requests.
+- **DockerHub**: Visit the [DockerHub](https://hub.docker.com/u/restackproject) to view the available containers.
