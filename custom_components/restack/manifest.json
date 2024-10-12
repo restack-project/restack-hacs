@@ -9,7 +9,7 @@
     "requirements": [
       "pyrestack==0.1.4",
       "decorest==0.1.0",
-      "httpx==0.27.0"
+      "httpx==0.27.2"
     ],
-    "version": "0.1.2"
+    "version": "0.1.3"
 }
